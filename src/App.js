@@ -3,6 +3,8 @@ import Todos from "./components/Todos";
 
 import { useState, useEffect } from "react";
 
+import "./App.css";
+
 import { environment } from "./environment/todos.env";
 
 function App() {
@@ -59,8 +61,8 @@ function App() {
   };
 
   return (
-    <div className="w-[800px] h-auto m-auto bg-slate-200 my-6 rounded-xl p-6 text-center">
-      <h1 className="text-[36px] font-bold"> Get Things Done</h1>
+    <div className="w-[800px] h-auto m-auto bg-purple-100 my-6 rounded-xl p-6 text-center shadow-md">
+      <h1 className="text-[36px] font-bold text-black mb-4">Get Things Done</h1>
       <NewTodo onAddTodo={addTodo} todoID={todos.length + 1} />
       {todos.map((todo, index) => (
         <Todos

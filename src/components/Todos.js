@@ -1,6 +1,9 @@
 import Button from "./Button";
 import { useRef, useEffect } from "react";
 
+import CheckImg from "../images/check.png";
+import CrossImg from "../images/cross.png";
+
 const Todos = ({
   title,
   completed,
@@ -36,45 +39,60 @@ const Todos = ({
   return (
     <li
       className={`${
-        completed && "bg-green-300 text-black"
-      } flex items-center my-4 justify-between p-2 border-2 rounded-lg text-white border-gray-300`}
+        completed ? "bg-green-200" : "bg-gray-100"
+      } flex items-center my-4 justify-between p-4 border-2 rounded-lg shadow-md`}
     >
       {!editMode ? (
         <>
-          <p className="w-56 text-black text-left">{title}</p>
-          <div>
-            <Button
-              title={completed ? "Uncheck" : "Check"}
-              className="bg-green-500 text-white font-bold py-[2px] px-2 mx-6 hover:bg-green-700"
+          <p
+            className={`w-56 ${
+              completed ? "line-through text-gray-500" : "text-black"
+            } text-left font-semibold`}
+          >
+            {title}
+          </p>
+          <div className="flex items-center space-x-4">
+            <button
+              className={`${
+                completed ? "bg-red-500" : "bg-green-500"
+              } p-2 rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300`}
               onClick={() => checkTodo(index)}
-            />
+            >
+              <img
+                className="w-4 h-4 invert"
+                src={completed ? CrossImg : CheckImg}
+              />
+            </button>
             {!completed && (
               <Button
                 title="Edit"
-                className="bg-blue-500 text-white font-bold py-[10px] px-8 rounded-tl-lg rounded-bl-lg hover:bg-blue-700"
+                className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition duration-300"
                 onClick={() => getIndex(index)}
               />
             )}
             <Button
               title="Delete"
-              className="bg-red-500 text-white font-bold py-[10px] px-8 rounded-tr-lg rounded-br-lg hover:bg-red-700"
+              className="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transform hover:scale-105 transition duration-300"
               onClick={() => deleteTodo(index)}
             />
           </div>
         </>
       ) : (
-        <form onSubmit={(e) => onUpdatetodo(e)}>
+        <form
+          onSubmit={(e) => onUpdatetodo(e)}
+          className="flex items-center space-x-2 w-full"
+        >
           <input
             type="text"
             name="todo"
             id="todo"
             ref={todoRef}
-            className="border-2 text-black border-gray-300 py-2 px-2 rounded-tr-none rounded-br-none rounded-lg focus:outline-none focus:ring-2 w-[600px] focus:ring-blue-500"
+            className="border-2 border-gray-300 py-2 px-4 rounded-lg flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Type Something..."
           />
           <Button
             title={"Update"}
-            className="bg-blue-500 text-white font-bold py-[10px] px-8 rounded-tr-lg rounded-br-lg hover:bg-blue-700"
+            className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transform hover:scale-105 transition duration-300"
           />
         </form>
       )}
