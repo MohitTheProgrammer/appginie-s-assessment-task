@@ -1,4 +1,4 @@
-import Form from "./components/Form";
+import NewTodo from "./components/NewTodo";
 import Todos from "./components/Todos";
 
 import { useState, useEffect } from "react";
@@ -59,18 +59,19 @@ function App() {
   };
 
   return (
-    <div className="w-[800px] h-auto m-auto bg-slate-200 mt-12 rounded-xl p-6 text-center">
+    <div className="w-[800px] h-auto m-auto bg-slate-200 my-6 rounded-xl p-6 text-center">
       <h1 className="text-[36px] font-bold"> Get Things Done</h1>
-      <Form onAddTodo={addTodo} todoID={todos.length + 1} />
+      <NewTodo onAddTodo={addTodo} todoID={todos.length + 1} />
       {todos.map((todo, index) => (
         <Todos
-          key={index + 1}
-          task={todo.title}
+          key={index}
+          title={todo.title}
           completed={todo.completed}
           deleteTodo={deleteTodo}
           checkTodo={checkTodo}
           index={index}
           editMode={editIndex === index}
+          todo={todo}
           getIndex={getIndex}
           editIndex={editIndex}
           updateTodo={updateTodo}

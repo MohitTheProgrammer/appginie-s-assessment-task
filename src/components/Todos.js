@@ -2,7 +2,7 @@ import Button from "./Button";
 import { useRef, useEffect } from "react";
 
 const Todos = ({
-  task,
+  title,
   completed,
   deleteTodo,
   index,
@@ -10,22 +10,24 @@ const Todos = ({
   getIndex,
   editMode,
   updateTodo,
+  todo,
 }) => {
   const todoRef = useRef("");
+
   useEffect(() => {
     if (editMode) {
-      todoRef.current.value = task;
+      todoRef.current.value = title;
     }
-  }, [editMode, task]);
+  }, [editMode, title]);
 
+  // Update todo handler
   const onUpdatetodo = (e) => {
     e.preventDefault();
     const newTitle = todoRef.current.value;
     updateTodo(
       {
-        id: index + 1,
+        ...todo,
         title: newTitle,
-        completed,
       },
       index
     );
@@ -39,7 +41,7 @@ const Todos = ({
     >
       {!editMode ? (
         <>
-          <p className="w-56 text-black text-left">{task}</p>
+          <p className="w-56 text-black text-left">{title}</p>
           <div>
             <Button
               title={completed ? "Uncheck" : "Check"}

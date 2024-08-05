@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import Button from "./Button";
 
-const Form = ({ onAddTodo, todoID }) => {
+const NewTodo = ({ onAddTodo, todoID }) => {
   const todoRef = useRef("");
 
   const addTodo = (e) => {
@@ -35,4 +35,4 @@ const Form = ({ onAddTodo, todoID }) => {
   );
 };
 
-export default Form;
+export default NewTodo;
