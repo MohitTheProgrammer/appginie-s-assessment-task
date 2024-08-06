@@ -13,19 +13,24 @@ function App() {
 
   // Get data handler
   useEffect(() => {
-    fetch(environment.API_URL)
-      .then((res) => res.json())
-      .then((data) => {
+    const getData = async () => {
+      try {
+        const res = await fetch(environment.API_URL);
+        const data = await res.json();
+        console.log(data)
         const arr = [];
-
         for (const key in data) {
           arr.push(data[key]);
         }
         setTodos(arr);
-      })
-      .catch(() => alert("Something went wrong!"));
-  }, []);
+      } catch {
+        alert("Something went wrong!");
+      }
+    };
 
+    getData();
+  }, []);
+  console.log(todos);
   //Delete todo handler
   const deleteTodo = (index) => {
     setTodos((state) => {
